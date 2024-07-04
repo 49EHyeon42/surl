@@ -6,7 +6,7 @@ import dev.ehyeon.surl.domain.ShortenUrl;
 import dev.ehyeon.surl.domain.ShortenUrlRepository;
 import dev.ehyeon.surl.application.request.ShortenUrlCreateRequest;
 import dev.ehyeon.surl.application.response.ShortenUrlCreateResponse;
-import dev.ehyeon.surl.application.response.ShortenUrlInformationDto;
+import dev.ehyeon.surl.application.response.ShortenUrlInformationResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,19 +45,19 @@ public class SimpleShortenUrlService {
         return originalUrl;
     }
 
-    public ShortenUrlInformationDto getShortenUrlInformationByShortenUrlKey(String shortenUrlKey) {
+    public ShortenUrlInformationResponse getShortenUrlInformationByShortenUrlKey(String shortenUrlKey) {
         ShortenUrl shortenUrl = shortenUrlRepository.findShortenUrlByShortenUrlKey(shortenUrlKey);
 
         if (null == shortenUrl)
             throw new NotFoundShortenUrlException();
 
-        ShortenUrlInformationDto shortenUrlInformationDto = new ShortenUrlInformationDto(
+        ShortenUrlInformationResponse shortenUrlInformationResponse = new ShortenUrlInformationResponse(
                 shortenUrl.getOriginalUrl(),
                 shortenUrl.getShortenUrlKey(),
                 shortenUrl.getRedirectCount()
         );
 
-        return shortenUrlInformationDto;
+        return shortenUrlInformationResponse;
     }
 
     private String getUniqueShortenUrlKey() {

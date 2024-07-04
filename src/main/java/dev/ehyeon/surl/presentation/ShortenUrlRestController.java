@@ -3,7 +3,7 @@ package dev.ehyeon.surl.presentation;
 import dev.ehyeon.surl.application.SimpleShortenUrlService;
 import dev.ehyeon.surl.application.request.ShortenUrlCreateRequest;
 import dev.ehyeon.surl.application.response.ShortenUrlCreateResponse;
-import dev.ehyeon.surl.application.response.ShortenUrlInformationDto;
+import dev.ehyeon.surl.application.response.ShortenUrlInformationResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -47,11 +47,11 @@ public class ShortenUrlRestController {
     }
 
     @RequestMapping(value = "/shortenUrl/{shortenUrlKey}", method = RequestMethod.GET)
-    public ResponseEntity<ShortenUrlInformationDto> getShortenUrlInformation(
+    public ResponseEntity<ShortenUrlInformationResponse> getShortenUrlInformation(
             @PathVariable String shortenUrlKey
     ) {
-        ShortenUrlInformationDto shortenUrlInformationDto =
+        ShortenUrlInformationResponse shortenUrlInformationResponse =
                 simpleShortenUrlService.getShortenUrlInformationByShortenUrlKey(shortenUrlKey);
-        return ResponseEntity.ok(shortenUrlInformationDto);
+        return ResponseEntity.ok(shortenUrlInformationResponse);
     }
 }
