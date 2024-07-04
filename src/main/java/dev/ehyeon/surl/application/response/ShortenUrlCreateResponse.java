@@ -1,6 +1,6 @@
 package dev.ehyeon.surl.application.response;
 
-public record ShortenUrlCreateResponseDto(
+public record ShortenUrlCreateResponse(
         String originalUrl,
         String shortenUrlKey
 ) {

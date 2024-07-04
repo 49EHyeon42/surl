@@ -2,7 +2,7 @@ package dev.ehyeon.surl.presentation;
 
 import dev.ehyeon.surl.application.SimpleShortenUrlService;
 import dev.ehyeon.surl.application.request.ShortenUrlCreateRequest;
-import dev.ehyeon.surl.application.response.ShortenUrlCreateResponseDto;
+import dev.ehyeon.surl.application.response.ShortenUrlCreateResponse;
 import dev.ehyeon.surl.application.response.ShortenUrlInformationDto;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,12 +25,12 @@ public class ShortenUrlRestController {
     }
 
     @RequestMapping(value = "/shortenUrl", method = RequestMethod.POST)
-    public ResponseEntity<ShortenUrlCreateResponseDto> createShortenUrl(
+    public ResponseEntity<ShortenUrlCreateResponse> createShortenUrl(
             @Valid @RequestBody ShortenUrlCreateRequest shortenUrlCreateRequest
     ) {
-        ShortenUrlCreateResponseDto shortenUrlCreateResponseDto =
+        ShortenUrlCreateResponse shortenUrlCreateResponse =
                 simpleShortenUrlService.generateShortenUrl(shortenUrlCreateRequest);
-        return ResponseEntity.ok(shortenUrlCreateResponseDto);
+        return ResponseEntity.ok(shortenUrlCreateResponse);
     }
 
     @RequestMapping(value = "/{shortenUrlKey}", method = RequestMethod.GET)

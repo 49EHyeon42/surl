@@ -5,7 +5,7 @@ import dev.ehyeon.surl.domain.NotFoundShortenUrlException;
 import dev.ehyeon.surl.domain.ShortenUrl;
 import dev.ehyeon.surl.domain.ShortenUrlRepository;
 import dev.ehyeon.surl.application.request.ShortenUrlCreateRequest;
-import dev.ehyeon.surl.application.response.ShortenUrlCreateResponseDto;
+import dev.ehyeon.surl.application.response.ShortenUrlCreateResponse;
 import dev.ehyeon.surl.application.response.ShortenUrlInformationDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,15 +20,15 @@ public class SimpleShortenUrlService {
         this.shortenUrlRepository = shortenUrlRepository;
     }
 
-    public ShortenUrlCreateResponseDto generateShortenUrl(ShortenUrlCreateRequest shortenUrlCreateRequest) {
+    public ShortenUrlCreateResponse generateShortenUrl(ShortenUrlCreateRequest shortenUrlCreateRequest) {
         String originalUrl = shortenUrlCreateRequest.originalUrl();
         String shortenUrlKey = getUniqueShortenUrlKey();
 
         ShortenUrl shortenUrl = new ShortenUrl(originalUrl, shortenUrlKey);
         shortenUrlRepository.saveShortenUrl(shortenUrl);
 
-        ShortenUrlCreateResponseDto shortenUrlCreateResponseDto = new ShortenUrlCreateResponseDto(shortenUrl.getOriginalUrl(), shortenUrl.getShortenUrlKey());
-        return shortenUrlCreateResponseDto;
+        ShortenUrlCreateResponse shortenUrlCreateResponse = new ShortenUrlCreateResponse(shortenUrl.getOriginalUrl(), shortenUrl.getShortenUrlKey());
+        return shortenUrlCreateResponse;
     }
 
     public String getOriginalUrlByShortenUrlKey(String shortenUrlKey) {
