@@ -1,4 +1,4 @@
-package dev.ehyeon.surl.presentation;
+package dev.ehyeon.surl.application.request;
 
 import jakarta.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.URL;

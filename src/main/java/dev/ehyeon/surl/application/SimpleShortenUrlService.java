@@ -4,9 +4,9 @@ import dev.ehyeon.surl.domain.LackOfShortenUrlKeyException;
 import dev.ehyeon.surl.domain.NotFoundShortenUrlException;
 import dev.ehyeon.surl.domain.ShortenUrl;
 import dev.ehyeon.surl.domain.ShortenUrlRepository;
-import dev.ehyeon.surl.presentation.ShortenUrlCreateRequestDto;
-import dev.ehyeon.surl.presentation.ShortenUrlCreateResponseDto;
-import dev.ehyeon.surl.presentation.ShortenUrlInformationDto;
+import dev.ehyeon.surl.application.request.ShortenUrlCreateRequestDto;
+import dev.ehyeon.surl.application.response.ShortenUrlCreateResponseDto;
+import dev.ehyeon.surl.application.response.ShortenUrlInformationDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

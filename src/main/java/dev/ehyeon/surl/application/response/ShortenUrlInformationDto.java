@@ -1,15 +1,17 @@
-package dev.ehyeon.surl.presentation;
+package dev.ehyeon.surl.application.response;
 
 import dev.ehyeon.surl.domain.ShortenUrl;
 
-public class ShortenUrlCreateResponseDto {
+public class ShortenUrlInformationDto {
 
     private String originalUrl;
     private String shortenUrlKey;
+    private Long redirectCount;
 
-    public ShortenUrlCreateResponseDto(ShortenUrl shortenUrl) {
+    public ShortenUrlInformationDto(ShortenUrl shortenUrl) {
         this.originalUrl = shortenUrl.getOriginalUrl();
         this.shortenUrlKey = shortenUrl.getShortenUrlKey();
+        this.redirectCount = shortenUrl.getRedirectCount();
     }
 
     public String getOriginalUrl() {
@@ -18,5 +20,9 @@ public class ShortenUrlCreateResponseDto {
 
     public String getShortenUrlKey() {
         return shortenUrlKey;
+    }
+
+    public Long getRedirectCount() {
+        return redirectCount;
     }
 }
