@@ -14,11 +14,11 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 @RestController
-public class ShortenUrlRestController {
+public class ShortenUrlController {
 
     private final SimpleShortenUrlService simpleShortenUrlService;
 
-    ShortenUrlRestController(SimpleShortenUrlService simpleShortenUrlService) {
+    ShortenUrlController(SimpleShortenUrlService simpleShortenUrlService) {
         this.simpleShortenUrlService = simpleShortenUrlService;
     }
 
