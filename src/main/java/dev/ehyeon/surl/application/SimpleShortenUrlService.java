@@ -21,7 +21,7 @@ public class SimpleShortenUrlService {
     }
 
     public ShortenUrlCreateResponseDto generateShortenUrl(ShortenUrlCreateRequestDto shortenUrlCreateRequestDto) {
-        String originalUrl = shortenUrlCreateRequestDto.getOriginalUrl();
+        String originalUrl = shortenUrlCreateRequestDto.originalUrl();
         String shortenUrlKey = getUniqueShortenUrlKey();
 
         ShortenUrl shortenUrl = new ShortenUrl(originalUrl, shortenUrlKey);
