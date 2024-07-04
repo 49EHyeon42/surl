@@ -1,7 +1,7 @@
 package dev.ehyeon.surl.application;
 
 import dev.ehyeon.surl.domain.exception.LackOfShortenUrlKeyException;
-import dev.ehyeon.surl.domain.exception.NotFoundShortenUrlException;
+import dev.ehyeon.surl.domain.exception.ShortenUrlNotFoundException;
 import dev.ehyeon.surl.domain.ShortenUrl;
 import dev.ehyeon.surl.domain.ShortenUrlRepository;
 import dev.ehyeon.surl.application.request.ShortenUrlCreateRequest;
@@ -35,7 +35,7 @@ public class SimpleShortenUrlService {
 
     public String getOriginalUrlByShortenUrlKey(String shortenUrlKey) {
         ShortenUrl shortenUrl = shortenUrlRepository.findByShortenUrlKey(shortenUrlKey)
-                .orElseThrow(NotFoundShortenUrlException::new);
+                .orElseThrow(ShortenUrlNotFoundException::new);
 
         shortenUrl.increaseRedirectCount();
 
@@ -46,7 +46,7 @@ public class SimpleShortenUrlService {
 
     public ShortenUrlInformationResponse getShortenUrlInformationByShortenUrlKey(String shortenUrlKey) {
         ShortenUrl shortenUrl = shortenUrlRepository.findByShortenUrlKey(shortenUrlKey)
-                .orElseThrow(NotFoundShortenUrlException::new);
+                .orElseThrow(ShortenUrlNotFoundException::new);
 
         return new ShortenUrlInformationResponse(
                 shortenUrl.getOriginalUrl(),
