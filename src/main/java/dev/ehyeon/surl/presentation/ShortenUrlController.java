@@ -22,7 +22,7 @@ public class ShortenUrlController {
         this.simpleShortenUrlService = simpleShortenUrlService;
     }
 
-    @PostMapping("/shortenUrl")
+    @PostMapping("/shorten-url")
     public ResponseEntity<ShortenUrlCreateResponse> createShortenUrl(
             @Valid @RequestBody ShortenUrlCreateRequest shortenUrlCreateRequest
     ) {
@@ -41,7 +41,7 @@ public class ShortenUrlController {
         return new ResponseEntity<>(httpHeaders, HttpStatus.MOVED_PERMANENTLY);
     }
 
-    @GetMapping("/shortenUrl/{shortenUrlKey}")
+    @GetMapping("/shorten-url/{shortenUrlKey}")
     public ResponseEntity<ShortenUrlInformationResponse> getShortenUrlInformation(
             @PathVariable String shortenUrlKey
     ) {
