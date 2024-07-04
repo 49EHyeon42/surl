@@ -1,7 +1,7 @@
 package dev.ehyeon.surl.application;
 
-import dev.ehyeon.surl.domain.LackOfShortenUrlKeyException;
-import dev.ehyeon.surl.domain.NotFoundShortenUrlException;
+import dev.ehyeon.surl.domain.exception.LackOfShortenUrlKeyException;
+import dev.ehyeon.surl.domain.exception.NotFoundShortenUrlException;
 import dev.ehyeon.surl.domain.ShortenUrl;
 import dev.ehyeon.surl.domain.ShortenUrlRepository;
 import dev.ehyeon.surl.application.request.ShortenUrlCreateRequest;

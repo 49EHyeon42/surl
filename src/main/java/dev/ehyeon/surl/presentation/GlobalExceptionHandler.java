@@ -1,7 +1,7 @@
 package dev.ehyeon.surl.presentation;
 
-import dev.ehyeon.surl.domain.LackOfShortenUrlKeyException;
-import dev.ehyeon.surl.domain.NotFoundShortenUrlException;
+import dev.ehyeon.surl.domain.exception.LackOfShortenUrlKeyException;
+import dev.ehyeon.surl.domain.exception.NotFoundShortenUrlException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;

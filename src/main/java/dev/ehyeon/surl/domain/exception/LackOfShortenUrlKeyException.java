@@ -1,4 +1,4 @@
-package dev.ehyeon.surl.domain;
+package dev.ehyeon.surl.domain.exception;
 
 public class LackOfShortenUrlKeyException extends RuntimeException {
 }
