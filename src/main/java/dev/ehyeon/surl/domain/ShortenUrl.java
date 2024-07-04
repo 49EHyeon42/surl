@@ -1,8 +1,11 @@
 package dev.ehyeon.surl.domain;
 
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class ShortenUrl {
+
+    private static final String BASE_56_CHARACTERS = "23456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz";
+    private static final int KEY_LENGTH = 8;
 
     private String originalUrl;
     private String shortenUrlKey;
@@ -27,21 +30,14 @@ public class ShortenUrl {
     }
 
     public void increaseRedirectCount() {
-        this.redirectCount = this.redirectCount + 1;
+        this.redirectCount++;
     }
 
     public static String generateShortenUrlKey() {
-        String base56Characters = "23456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz";
-        Random random = new Random();
-        StringBuilder shortenUrlKey = new StringBuilder();
-
-        for (int count = 0; count < 8; count++) {
-            int base56CharactersIndex = random.nextInt(0, base56Characters.length());
-            char base56Character = base56Characters.charAt(base56CharactersIndex);
-
-            shortenUrlKey.append(base56Character);
-        }
-
-        return shortenUrlKey.toString();
+        return ThreadLocalRandom.current()
+                .ints(KEY_LENGTH, 0, BASE_56_CHARACTERS.length())
+                .mapToObj(BASE_56_CHARACTERS::charAt)
+                .collect(StringBuilder::new, StringBuilder::append, StringBuilder::append)
+                .toString();
     }
 }
