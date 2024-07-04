@@ -1,8 +1,12 @@
 package dev.ehyeon.surl.domain;
 
+import java.util.Optional;
+
 public interface ShortenUrlRepository {
 
-    void saveShortenUrl(ShortenUrl shortenUrl);
+    void save(ShortenUrl shortenUrl);
 
-    ShortenUrl findShortenUrlByShortenUrlKey(String shortenUrlKey);
+    Optional<ShortenUrl> findByShortenUrlKey(String shortenUrlKey);
+
+    boolean existsByShortenUrlKey(String shortenUrlKey);
 }
