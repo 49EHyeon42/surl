@@ -5,6 +5,7 @@ import dev.ehyeon.surl.domain.ShortenUrlRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Repository
@@ -18,8 +19,7 @@ public class MapShortenUrlRepository implements ShortenUrlRepository {
     }
 
     @Override
-    public ShortenUrl findShortenUrlByShortenUrlKey(String shortenUrlKey) {
-        ShortenUrl shortenUrl = shortenUrls.get(shortenUrlKey);
-        return shortenUrl;
+    public Optional<ShortenUrl> findShortenUrlByShortenUrlKey(String shortenUrlKey) {
+        return Optional.ofNullable(shortenUrls.get(shortenUrlKey));
     }
 }

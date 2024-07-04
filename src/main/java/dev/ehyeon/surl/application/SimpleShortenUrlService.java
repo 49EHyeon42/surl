@@ -9,6 +9,8 @@ import dev.ehyeon.surl.application.response.ShortenUrlCreateResponse;
 import dev.ehyeon.surl.application.response.ShortenUrlInformationResponse;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class SimpleShortenUrlService {
 
@@ -30,11 +32,8 @@ public class SimpleShortenUrlService {
     }
 
     public String getOriginalUrlByShortenUrlKey(String shortenUrlKey) {
-        ShortenUrl shortenUrl = shortenUrlRepository.findShortenUrlByShortenUrlKey(shortenUrlKey);
-
-        if (null == shortenUrl) {
-            throw new NotFoundShortenUrlException();
-        }
+        ShortenUrl shortenUrl = shortenUrlRepository.findShortenUrlByShortenUrlKey(shortenUrlKey)
+                .orElseThrow(NotFoundShortenUrlException::new);
 
         shortenUrl.increaseRedirectCount();
 
@@ -44,11 +43,8 @@ public class SimpleShortenUrlService {
     }
 
     public ShortenUrlInformationResponse getShortenUrlInformationByShortenUrlKey(String shortenUrlKey) {
-        ShortenUrl shortenUrl = shortenUrlRepository.findShortenUrlByShortenUrlKey(shortenUrlKey);
-
-        if (null == shortenUrl) {
-            throw new NotFoundShortenUrlException();
-        }
+        ShortenUrl shortenUrl = shortenUrlRepository.findShortenUrlByShortenUrlKey(shortenUrlKey)
+                .orElseThrow(NotFoundShortenUrlException::new);
 
         return new ShortenUrlInformationResponse(
                 shortenUrl.getOriginalUrl(),
@@ -63,9 +59,10 @@ public class SimpleShortenUrlService {
 
         while (count++ < MAX_RETRY_COUNT) {
             String shortenUrlKey = ShortenUrl.generateShortenUrlKey();
-            ShortenUrl shortenUrl = shortenUrlRepository.findShortenUrlByShortenUrlKey(shortenUrlKey);
 
-            if (null == shortenUrl) {
+            Optional<ShortenUrl> optional = shortenUrlRepository.findShortenUrlByShortenUrlKey(shortenUrlKey);
+
+            if (optional.isEmpty()) {
                 return shortenUrlKey;
             }
         }
