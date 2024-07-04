@@ -1,7 +1,7 @@
 package dev.ehyeon.surl.presentation;
 
 import dev.ehyeon.surl.application.SimpleShortenUrlService;
-import dev.ehyeon.surl.application.request.ShortenUrlCreateRequestDto;
+import dev.ehyeon.surl.application.request.ShortenUrlCreateRequest;
 import dev.ehyeon.surl.application.response.ShortenUrlCreateResponseDto;
 import dev.ehyeon.surl.application.response.ShortenUrlInformationDto;
 import jakarta.validation.Valid;
@@ -26,10 +26,10 @@ public class ShortenUrlRestController {
 
     @RequestMapping(value = "/shortenUrl", method = RequestMethod.POST)
     public ResponseEntity<ShortenUrlCreateResponseDto> createShortenUrl(
-            @Valid @RequestBody ShortenUrlCreateRequestDto shortenUrlCreateRequestDto
+            @Valid @RequestBody ShortenUrlCreateRequest shortenUrlCreateRequest
     ) {
         ShortenUrlCreateResponseDto shortenUrlCreateResponseDto =
-                simpleShortenUrlService.generateShortenUrl(shortenUrlCreateRequestDto);
+                simpleShortenUrlService.generateShortenUrl(shortenUrlCreateRequest);
         return ResponseEntity.ok(shortenUrlCreateResponseDto);
     }
 
