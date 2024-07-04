@@ -51,7 +51,11 @@ public class SimpleShortenUrlService {
         if (null == shortenUrl)
             throw new NotFoundShortenUrlException();
 
-        ShortenUrlInformationDto shortenUrlInformationDto = new ShortenUrlInformationDto(shortenUrl);
+        ShortenUrlInformationDto shortenUrlInformationDto = new ShortenUrlInformationDto(
+                shortenUrl.getOriginalUrl(),
+                shortenUrl.getShortenUrlKey(),
+                shortenUrl.getRedirectCount()
+        );
 
         return shortenUrlInformationDto;
     }
