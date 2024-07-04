@@ -7,10 +7,14 @@ import dev.ehyeon.surl.domain.ShortenUrlRepository;
 import dev.ehyeon.surl.application.request.ShortenUrlCreateRequest;
 import dev.ehyeon.surl.application.response.ShortenUrlCreateResponse;
 import dev.ehyeon.surl.application.response.ShortenUrlInformationResponse;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
 public class SimpleShortenUrlService {
+
+    @Value("${config.shorten-url.maximum-number-of-retries}")
+    private int MAXIMUM_NUMBER_OF_RETRIES;
 
     private final ShortenUrlRepository shortenUrlRepository;
 
@@ -52,10 +56,7 @@ public class SimpleShortenUrlService {
     }
 
     private String getUniqueShortenUrlKey() {
-        final int MAX_RETRY_COUNT = 5;
-        int count = 0;
-
-        while (count++ < MAX_RETRY_COUNT) {
+        for (int i = 0; i < MAXIMUM_NUMBER_OF_RETRIES; i++) {
             String shortenUrlKey = ShortenUrl.generateShortenUrlKey();
 
             if (!shortenUrlRepository.existsByShortenUrlKey(shortenUrlKey)) {
