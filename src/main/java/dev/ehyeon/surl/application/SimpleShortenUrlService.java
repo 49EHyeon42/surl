@@ -9,8 +9,6 @@ import dev.ehyeon.surl.application.response.ShortenUrlCreateResponse;
 import dev.ehyeon.surl.application.response.ShortenUrlInformationResponse;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 public class SimpleShortenUrlService {
 
@@ -60,9 +58,7 @@ public class SimpleShortenUrlService {
         while (count++ < MAX_RETRY_COUNT) {
             String shortenUrlKey = ShortenUrl.generateShortenUrlKey();
 
-            Optional<ShortenUrl> optional = shortenUrlRepository.findByShortenUrlKey(shortenUrlKey);
-
-            if (optional.isEmpty()) {
+            if (!shortenUrlRepository.existsByShortenUrlKey(shortenUrlKey)) {
                 return shortenUrlKey;
             }
         }

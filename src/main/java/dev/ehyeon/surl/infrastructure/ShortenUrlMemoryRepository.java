@@ -22,4 +22,9 @@ public class ShortenUrlMemoryRepository implements ShortenUrlRepository {
     public Optional<ShortenUrl> findByShortenUrlKey(String shortenUrlKey) {
         return Optional.ofNullable(shortenUrls.get(shortenUrlKey));
     }
+
+    @Override
+    public boolean existsByShortenUrlKey(String shortenUrlKey) {
+        return shortenUrls.containsKey(shortenUrlKey);
+    }
 }
