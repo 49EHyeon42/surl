@@ -26,24 +26,24 @@ public class SimpleShortenUrlService {
 
         ShortenUrl shortenUrl = new ShortenUrl(originalUrl, shortenUrlKey);
 
-        shortenUrlRepository.saveShortenUrl(shortenUrl);
+        shortenUrlRepository.save(shortenUrl);
 
         return new ShortenUrlCreateResponse(shortenUrl.getOriginalUrl(), shortenUrl.getShortenUrlKey());
     }
 
     public String getOriginalUrlByShortenUrlKey(String shortenUrlKey) {
-        ShortenUrl shortenUrl = shortenUrlRepository.findShortenUrlByShortenUrlKey(shortenUrlKey)
+        ShortenUrl shortenUrl = shortenUrlRepository.findByShortenUrlKey(shortenUrlKey)
                 .orElseThrow(NotFoundShortenUrlException::new);
 
         shortenUrl.increaseRedirectCount();
 
-        shortenUrlRepository.saveShortenUrl(shortenUrl);
+        shortenUrlRepository.save(shortenUrl);
 
         return shortenUrl.getOriginalUrl();
     }
 
     public ShortenUrlInformationResponse getShortenUrlInformationByShortenUrlKey(String shortenUrlKey) {
-        ShortenUrl shortenUrl = shortenUrlRepository.findShortenUrlByShortenUrlKey(shortenUrlKey)
+        ShortenUrl shortenUrl = shortenUrlRepository.findByShortenUrlKey(shortenUrlKey)
                 .orElseThrow(NotFoundShortenUrlException::new);
 
         return new ShortenUrlInformationResponse(
@@ -60,7 +60,7 @@ public class SimpleShortenUrlService {
         while (count++ < MAX_RETRY_COUNT) {
             String shortenUrlKey = ShortenUrl.generateShortenUrlKey();
 
-            Optional<ShortenUrl> optional = shortenUrlRepository.findShortenUrlByShortenUrlKey(shortenUrlKey);
+            Optional<ShortenUrl> optional = shortenUrlRepository.findByShortenUrlKey(shortenUrlKey);
 
             if (optional.isEmpty()) {
                 return shortenUrlKey;

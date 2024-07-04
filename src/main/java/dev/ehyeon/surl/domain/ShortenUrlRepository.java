@@ -4,7 +4,7 @@ import java.util.Optional;
 
 public interface ShortenUrlRepository {
 
-    void saveShortenUrl(ShortenUrl shortenUrl);
+    void save(ShortenUrl shortenUrl);
 
-    Optional<ShortenUrl> findShortenUrlByShortenUrlKey(String shortenUrlKey);
+    Optional<ShortenUrl> findByShortenUrlKey(String shortenUrlKey);
 }

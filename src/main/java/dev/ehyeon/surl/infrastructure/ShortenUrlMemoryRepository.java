@@ -9,17 +9,17 @@ import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Repository
-public class MapShortenUrlRepository implements ShortenUrlRepository {
+public class ShortenUrlMemoryRepository implements ShortenUrlRepository {
 
-    private Map<String, ShortenUrl> shortenUrls = new ConcurrentHashMap<>();
+    private final Map<String, ShortenUrl> shortenUrls = new ConcurrentHashMap<>();
 
     @Override
-    public void saveShortenUrl(ShortenUrl shortenUrl) {
+    public void save(ShortenUrl shortenUrl) {
         shortenUrls.put(shortenUrl.getShortenUrlKey(), shortenUrl);
     }
 
     @Override
-    public Optional<ShortenUrl> findShortenUrlByShortenUrlKey(String shortenUrlKey) {
+    public Optional<ShortenUrl> findByShortenUrlKey(String shortenUrlKey) {
         return Optional.ofNullable(shortenUrls.get(shortenUrlKey));
     }
 }
